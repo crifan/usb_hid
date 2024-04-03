@@ -1,0 +1,475 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="ch02_hid_report_example"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>HID Report Example</title>
+<abstract></abstract>
+
+<sect1 xml:id="normal_examples"><title>Normal examples</title>
+    <sect2 xml:id="generic_mouse"><title>Generic mouse</title>
+        <para>3-button mouse:</para>
+        <figure id="fg.hid_rpt_mouse"><title>HID Report Example - 3 button mouse</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_rpt_mouse.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_rpt_mouse.gif" align="center" scalefit="1" width="100%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>Note: above data’s format is:</para>
+        <para>05 01 = 0x 01 05</para>
+        <para>09 02 = 0x 02 09</para>
+    </sect2>
+    
+    <sect2 xml:id="keyboard"><title>Keyboard</title>
+        <figure id="fg.hid_rpt_keyboard_1"><title>HID Report Example - keyboard - 1/2 </title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_rpt_keyboard.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_rpt_keyboard.gif" align="center" scalefit="1" width="80%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <figure id="fg.hid_rpt_keyboard_2"><title>HID Report Example - keyboard - 2/2 </title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_rpt_keyboard_2.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_rpt_keyboard_2.gif" align="center" scalefit="1" width="80%" />
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+</sect1>
+
+<sect1 xml:id="hid_report_example_analysis"><title>An HID Report Example analysis</title>
+    <para>Follow is the example.</para>
+    <para>According to the format, defined in specification:</para>
+    <figure id="fg.hid_data_format"><title>HID Data Format</title>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/hid_data_format.gif" align="left" scalefit="0" width="100%" />
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/hid_data_format.gif" align="center" scalefit="1" width="100%"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para>Now to analysis the corresponding meaning for every group bytes:</para>
+    <note xml:id="note.data_send_lsb"><title>Data send by LSB</title>
+        <para>The data is send by LSB, so when “<emphasis>0x45, 0xFF</emphasis>’ is sent, first send is “<emphasis>0x45</emphasis>”, second send “<emphasis>0xFF</emphasis>”, the LSB is “<emphasis>0x45</emphasis>” located in low address, the MSB “<emphasis>0xFF</emphasis>” located in high address, so the hex value is ”<emphasis>0xFF45</emphasis>“</para>
+    </note>
+    <programlistingco>
+        <programlisting>
+	0x06, 0x45, 0xFF,<co id="co.06_45_FF" linkends="co.note.06_45_FF" />
+	0x0A, 0x00, 0xA0,<co id="co.0A_00_A0" linkends="co.note.0A_00_A0" />
+	0xA1, 0x01,<co id="co.A1_01" linkends="co.note.A1_01" />
+	0x75, 0x08,<co id="co.75_08_1" linkends="co.note.75_08_1" />
+	0x96, 0x07, 0x01,<co id="co.96_07_01" linkends="co.note.96_07_01" />
+	0x15, 0x00,<co id="co.15_00" linkends="co.note.15_00" />
+	0x26, 0xFF, 0x00,<co id="co.26_FF_00" linkends="co.note.26_FF_00" />
+	0x0A, 0x01, 0xA0,<co id="co.0A_01_A0" linkends="co.note.0A_01_A0" />
+	0x91, 0x02,<co id="co.91_02" linkends="co.note.91_02" />
+	0x75, 0x08,<co id="co.75_08_2" linkends="co.note.75_08_2" />
+	0x95, 0x08,<co id="co.95_08" linkends="co.note.95_08" />
+	0x0A, 0x02, 0xA0,<co id="co.0A_02_A0" linkends="co.note.0A_02_A0" />
+	0x81, 0x02,<co id="co.81_02" linkends="co.note.81_02" />
+	0xC0<co id="co.C0" linkends="co.note.C0" />
+        </programlisting>
+        <calloutlist>
+            <callout id="co.note.06_45_FF" arearefs="co.06_45_FF" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry>[Data]</entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x06</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry><emphasis>0xFF</emphasis></entry><entry><emphasis>0x45</emphasis></entry><entry>0000</entry><entry>01</entry><entry>10</entry><entry>0000 0110</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >0xFF45 -> 0xFF00 -0xFFFF = Vendor defined</entry><entry>Usage Page</entry><entry>Global item</entry><entry>2 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.0A_00_A0" arearefs="co.0A_00_A0" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry>[Data]</entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x0A</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry><emphasis>0xA0</emphasis></entry><entry><emphasis>0x00</emphasis></entry><entry>0000</entry><entry>10</entry><entry>10</entry><entry>0000 1010</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >Usage=0xA000</entry><entry>Usage</entry><entry>Local item</entry><entry>2 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+                <para>here Usage=0xA000 is just self defined, just need not confict with self's others, no other special meaning</para>
+            </callout>
+            
+            <callout id="co.note.A1_01" arearefs="co.A1_01" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0xA1</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x01</emphasis></entry><entry>1010</entry><entry>00</entry><entry>01</entry><entry>1010 0001</entry></row>
+                            <row><entry></entry><entry>Application (mouse, keyboard)</entry><entry>Collection</entry><entry>Main item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.75_08_1" arearefs="co.75_08_1" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x75</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x08</emphasis></entry><entry>0111</entry><entry>01</entry><entry>01</entry><entry>0111 0101</entry></row>
+                            <row><entry></entry><entry>Report Size = 0x08 bits</entry><entry>Report Size</entry><entry>Global item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.96_07_01" arearefs="co.96_07_01" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry>[Data]</entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x96</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry><emphasis>0x01</emphasis></entry><entry><emphasis>0x07</emphasis></entry><entry>1001</entry><entry>01</entry><entry>10</entry><entry>1001 0110</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >Report Count = 0x0107=263</entry><entry>Report Count</entry><entry>Global item</entry><entry>2 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.15_00" arearefs="co.15_00" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x15</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x00</emphasis></entry><entry>0001</entry><entry>01</entry><entry>01</entry><entry>0001 0101</entry></row>
+                            <row><entry></entry><entry>Logical Minimum = 0x00</entry><entry>Logical Minimum</entry><entry>Global item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.26_FF_00" arearefs="co.26_FF_00" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry>[Data]</entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x26</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry><emphasis>0x00</emphasis></entry><entry><emphasis>0xFF</emphasis></entry><entry>0010</entry><entry>01</entry><entry>10</entry><entry>0010 0110</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >Logical Maximum =x00FF=255</entry><entry>Logical Maximum</entry><entry>Global item</entry><entry>2 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.0A_01_A0" arearefs="co.0A_01_A0" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry>[Data]</entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x0A</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry><emphasis>0xA0</emphasis></entry><entry><emphasis>0x01</emphasis></entry><entry>0000</entry><entry>10</entry><entry>10</entry><entry>0000 1010</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >Usage = 0xA001</entry><entry>Usage</entry><entry>Local item</entry><entry>2 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+                <para>here Usage=0xA001 is just self defined, just need not confict with self's others, no other special meaning</para>
+            </callout>
+            
+            <callout id="co.note.91_02" arearefs="co.91_02" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x91</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x02</emphasis></entry><entry>1001</entry><entry>00</entry><entry>01</entry><entry>1001 0001</entry></row>
+                            <row><entry></entry><entry><para>0x02=0000 0010</para><para>Bit 1 { Variable (1)}</para><para>All other bits are Reserved (0)</para></entry><entry>Output</entry><entry>Main item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.75_08_2" arearefs="co.75_08_2" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x75</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x08</emphasis></entry><entry>0111</entry><entry>01</entry><entry>01</entry><entry>0111 0101</entry></row>
+                            <row><entry></entry><entry>Report Size = 0x08 bits</entry><entry>Report Size</entry><entry>Global item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.95_08" arearefs="co.95_08" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x95</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x08</emphasis></entry><entry>1001</entry><entry>01</entry><entry>01</entry><entry>1001 0101</entry></row>
+                            <row><entry></entry><entry>Report Count= 0x08 = 8</entry><entry>Report Count</entry><entry>Global item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.0A_02_A0" arearefs="co.0A_02_A0" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry>[Data]</entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x0A</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry><emphasis>0xA0</emphasis></entry><entry><emphasis>0x02</emphasis></entry><entry>0000</entry><entry>10</entry><entry>10</entry><entry>0000 1010</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >Usage = 0xA002</entry><entry>Usage</entry><entry>Local item</entry><entry>2 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+            
+            <callout id="co.note.81_02" arearefs="co.81_02" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0x81</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry><emphasis>0x02</emphasis></entry><entry>1000</entry><entry>00</entry><entry>01</entry><entry>1000 0001</entry></row>
+                            <row><entry></entry><entry><para>0x02=0000 0010</para><para>Bit 1 { Variable (1)}</para><para>All other bits are Reserved (0)</para></entry><entry>Input</entry><entry>Main item</entry><entry>1 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+
+            <callout id="co.note.C0" arearefs="co.C0" >
+                <informaltable><?dbhtml table-width="600px" ?>
+                    <tgroup cols="6">
+                        <colspec colnum="1" colname="col1" colwidth="1*" />
+                        <colspec colnum="2" colname="col2" colwidth="1*" />
+                        <colspec colnum="3" colname="col3" colwidth="1*" />
+                        <colspec colnum="4" colname="col4" colwidth="1*" />
+                        <colspec colnum="5" colname="col5" colwidth="1*" />
+                        <colspec colnum="6" colname="col6" colwidth="1*" />
+                        
+                        <thead>
+                            <row><entry></entry><entry>[Data]</entry><entry>bTag=7:4</entry><entry>bType=3:2</entry><entry>bSize=1:0</entry><entry><emphasis>0xC0</emphasis></entry></row>
+                        </thead>
+                        
+                        <tbody>
+                            <row><entry></entry><entry></entry><entry>1100</entry><entry>00</entry><entry>00</entry><entry>1100 0000</entry></row>
+                            <row><entry namest="col1" nameend="col2" align="center" >Closes an item collection</entry><entry>End Collection</entry><entry>Main item</entry><entry>0 bytes</entry><entry></entry></row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </callout>
+        </calloutlist>
+    </programlistingco>
+
+    <para>After analyze following data, the summary is:</para>
+    <informaltable>
+        <tgroup cols="4">
+            <colspec colnum="1" colname="col1" colwidth="2*" />
+            <colspec colnum="2" colname="col2" colwidth="2*" />
+            <colspec colnum="3" colname="col3" colwidth="2*" align="right" />
+            <colspec colnum="4" colname="col4" colwidth="1*" />
+            
+            <tbody>
+                <row><entry>Usage Page (0xFF45)</entry><entry>=Vendor-Specific</entry><entry>0xFF45 06</entry><entry>Global</entry></row>
+                <row><entry>Usage (0xA000)</entry><entry></entry><entry>0xA000 0A</entry><entry>Local</entry></row>
+                <row><entry>Collection (Application)</entry><entry></entry><entry><emphasis>0x01 A1</emphasis></entry><entry>Main</entry></row>
+                <row><entry></entry><entry>Report Size (8)</entry><entry>0x08 75</entry><entry>Global</entry></row>
+                <row><entry></entry><entry>Report Count (263)</entry><entry>0x0107 96 </entry><entry>Global</entry></row>
+                <row><entry></entry><entry>Logical Minimum (0)</entry><entry>0x00 15</entry><entry>Global</entry></row>
+                <row><entry></entry><entry>Logical Maximum (255)</entry><entry>0x00FF 26</entry><entry>Global</entry></row>
+                <row><entry></entry><entry>Usage (0xA001)</entry><entry>0xA0001 0A</entry><entry>Local</entry></row>
+                <row><entry></entry><entry>Output (Variable)</entry><entry>0x02 91</entry><entry>Main</entry></row>
+                <row><entry></entry><entry>Report Size (8)</entry><entry>0x08 75</entry><entry>Global</entry></row>
+                <row><entry></entry><entry>Report Count (8)</entry><entry>0x08 95</entry><entry>Global</entry></row>
+                <row><entry></entry><entry>Usage (0xA002)</entry><entry>0xA002 0A</entry><entry>Local</entry></row>
+                <row><entry></entry><entry>Input (Variable)</entry><entry>0x02 81</entry><entry>Main</entry></row>
+                <row><entry>End Collection</entry><entry></entry><entry><emphasis>0xC0</emphasis></entry><entry>Main</entry></row>
+            </tbody>
+        </tgroup>
+    </informaltable>
+    <para></para>
+    <informaltable>
+        <tgroup cols="2">
+            <colspec colnum="1" colname="col1" colwidth="1*" />
+            <colspec colnum="2" colname="col2" colwidth="1*" />
+            
+            <tbody>
+                <row><entry><emphasis>Report (Usage=0xA0000)</emphasis></entry><entry></entry></row>
+                <row><entry></entry><entry><emphasis>Output Report (Usage=0xA001)</emphasis></entry></row>
+                <row><entry>263 bytes</entry><entry>&bgcolor_bisque;Byte 0</entry></row>
+                <row><entry></entry><entry>&bgcolor_bisque;Byte 1</entry></row>
+                <row><entry></entry><entry>&bgcolor_bisque;...</entry></row>
+                <row><entry></entry><entry>&bgcolor_bisque;...</entry></row>
+                <row><entry></entry><entry>&bgcolor_bisque;Byte 261</entry></row>
+                <row><entry></entry><entry>&bgcolor_bisque;Byte 262</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry><emphasis>Input Report (Usage=0xA002)</emphasis></entry></row>
+                <row><entry>8 bytes</entry><entry>&bgcolor_aqua;Byte 0</entry></row>
+                <row><entry></entry><entry>&bgcolor_aqua;Byte 1</entry></row>
+                <row><entry></entry><entry>&bgcolor_aqua;...</entry></row>
+                <row><entry></entry><entry>&bgcolor_aqua;Byte 7</entry></row>
+                <row><entry></entry><entry></entry></row>
+            </tbody>
+        </tgroup>
+    </informaltable>
+    <para>All of above means:</para>
+    <orderedlist>
+        <listitem>This is a <emphasis>vendor-specific HID device</emphasis></listitem>
+        <listitem>input or output is relative to Host side:
+            <itemizedlist>
+                <listitem>Output = Host &rArr; Device = <emphasis>host   send 263 bytes to device</emphasis></listitem>
+                <listitem>Input  = Host &lArr; Device = <emphasis>device send   8 bytes to host</emphasis></listitem>
+            </itemizedlist>
+        </listitem>
+        <listitem>Every bytes <emphasis>value range is 0~255</emphasis></listitem>
+    </orderedlist>
+</sect1>
+
+</chapter>

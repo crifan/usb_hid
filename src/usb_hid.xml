@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE book
+[
+
+<!ENTITY cur_book_name      "usb_hid" >
+<!ENTITY publish_date       "2013-09-05" >
+<!ENTITY release_version    "0.6" >
+
+<!ENTITY copyrith_year "2012" >
+<!ENTITY entity_common_multi_format     SYSTEM  "../../entity_common_multi_format.xml">
+<!ENTITY entity_common_publish_info     SYSTEM  "../../entity_common_publish_info.xml">
+]>
+
+<book version="5.0"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+
+    xml:lang="zh_CN"
+    >
+
+<info>
+    <title>USB HID Learning Record</title>
+    <subtitle></subtitle>
+    <keywordset>
+        <keyword>USB</keyword>
+        <keyword>HID</keyword>
+        <keyword>Report</keyword>
+        <keyword>学习</keyword>
+        <keyword>笔记</keyword>
+    </keywordset>
+
+    <abstract>
+        <para>本文主要介绍了USB HID的基本知识，以及举例说明如何解析HID Report</para>
+        &entity_common_multi_format;
+    </abstract>
+
+    <revhistory>
+        <revision>
+            <revnumber>0.4</revnumber>
+            <date>2011-06-16</date>
+            <revremark>
+                <orderedlist>
+                    <listitem>写好了USB HID基本内容</listitem>
+                </orderedlist>
+            </revremark>
+            <authorinitials>crl</authorinitials>
+        </revision>
+        <revision>
+            <revnumber>&release_version;</revnumber>
+            <date>&publish_date;</date>
+            <revremark>
+                <orderedlist>
+                    <listitem>通过Docbook发布</listitem>
+                    <listitem>更新了所有xml:id</listitem>
+                </orderedlist>
+            </revremark>
+            <authorinitials>crl</authorinitials>
+        </revision>
+    </revhistory>
+
+    &entity_common_publish_info;
+</info>
+
+<xi:include href="ch01_hid_basic.xml"/>
+<xi:include href="ch02_hid_report_example.xml"/>
+
+</book>

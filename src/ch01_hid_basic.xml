@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="ch01_from_to"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>USB HID基础知识</title>
+<abstract></abstract>
+
+<sect1 xml:id="usb_hid_structure"><title>USB HID Structure</title>
+    <figure id="fg.usb_hid_structure"><title>USB HID Structure</title>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/usb_hid_structure.gif" align="left" scalefit="0" width="100%" />
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/usb_hid_structure.gif" align="center" scalefit="1" width="100%"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</sect1>
+
+<sect1 xml:id="hid_descriptor"><title>HID descriptor</title>
+    <figure id="fg.usb_hid_descriptor"><title>HID descriptor</title>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/usb_hid_descriptor.gif" align="left" scalefit="0" width="100%" />
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/usb_hid_descriptor.gif" align="center" scalefit="1" width="100%"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <sect2 xml:id="hid_class_structure"><title>HID Class Structure</title>
+        <figure id="fg.hid_class_struct"><title>HID Class Structure</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_class_struct.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_class_struct.gif" align="center" scalefit="1" width="100%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+
+    <sect2 xml:id="short_items"><title>Short Items</title>
+        <figure id="fg.hid_short_items"><title>HID Short Items</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_short_items.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_short_items.gif" align="center" scalefit="1" width="100%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+
+    <sect2 xml:id="long_items"><title>Long Items</title>
+        <figure id="fg.hid_long_items"><title>HID Long Items</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_long_items.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_long_items.gif" align="center" scalefit="1" width="100%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+
+    <sect2 xml:id="main_items"><title>Main Items</title>
+        <figure id="fg.hid_main_items"><title>HID Main Items</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_main_items.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_main_items.gif" align="center" scalefit="1" width="90%"/>
+                </imageobject>
+            </mediaobject>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_main_items_2.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_main_items_2.gif" align="center" scalefit="1" width="90%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+
+    <sect2 xml:id="global_items"><title>Global Items</title>
+        <figure id="fg.hid_global_items"><title>HID Global Items</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_global_items.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_global_items.gif" align="center" scalefit="1" width="60%"/>
+                </imageobject>
+            </mediaobject>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_global_items_2.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_global_items_2.gif" align="center" scalefit="1" width="60%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+
+    <sect2 xml:id="local_items"><title>Local Items</title>
+        <figure id="fg.hid_local_items"><title>HID Local Items</title>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/hid_local_items.gif" align="left" scalefit="0" width="100%" />
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/hid_local_items.gif" align="center" scalefit="1" width="100%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </sect2>
+
+</sect1>
+
+<sect1 xml:id="usage_page_summary"><title>Usage Page Summary</title>
+    <figure id="fg.hid_use_page"><title>HID Usage page summary</title>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/hid_use_page.gif" align="left" scalefit="0" width="100%" />
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/hid_use_page.gif" align="center" scalefit="1" width="100%"/>
+            </imageobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/hid_use_page_2.gif" align="left" scalefit="0" width="100%" />
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/hid_use_page_2.gif" align="center" scalefit="1" width="100%"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</sect1>
+
+</chapter>
